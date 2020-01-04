@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Register Form</title>
+</head>
+
+<body>
+  <h1>Register</h1>
+
+  <form>
+    <label for="firstname">First Name: </label>
+    <input type="text" name="firstname" id="firstname" placeholder="John" required>
+
+    <label for="lastname">Last Name: </label>
+    <input type="text" name="lastname" id="lastname" placeholder="Smith" required title="this is a tip">
+
+    <div>
+      <label for="male">Male</label>
+      <input id="male" name="gender" type="radio" value="1">
+      <label for="female">Female</label>
+      <input id="female" name="gender" type="radio" value="2">
+      <label for="other">Other</label>
+      <input id="other" name="gender" type="radio" value="0">
+    </div>
+      <label>Email: 
+        <input name="email" type="email" placeholder="your email" required>
+      </label>
+
+      <label>Password:
+        <!-- <input type="password" name="password" id="password" minlength="5" maxlength="10" required> -->
+        <input name="password" type="password" pattern=".{5,10}" required title="Password must between 5 - 10 chars">
+      </label>
+
+    <div>
+      <label>Birthday: 
+        <!-- month -->
+        <select name="month">
+          <option>month</option>
+          <option>Jan</option>
+          <option>Fen</option>
+          <option>Mar</option>
+        </select>
+        
+        <!-- day -->
+        <select name="day">
+          <option>day</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+        </select>
+
+        <!-- year -->
+        <select name="year">
+          <option>year</option>
+          <option>1999</option>
+          <option>2000</option>
+          <option>2001</option>
+        </select>
+      </label>
+    </div>
+
+    <div>
+      <label>I agree to the ters and conditions
+        <input type="checkbox" name="agree" id="agree">
+      </label>
+    </div>
+    <br>
+
+    <div><button>Submit</button></div>
+  </form>
+
+</body>
+
+</html>
