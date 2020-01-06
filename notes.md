@@ -1,27 +1,19 @@
-# 1. HTML Intro
+# 1. HTML
 
-1. General rule: `</tag key="value"> content </tag>`
-
-1. HTML element
-    - tag
-        - opening tag
-        - closing tag (optional)
-        - attributes (optional)
-    - content (optional)
+## 1.1. HTML Document Structure
 
 1. HTML document
 
     ```html
     <!DOCTYPE html>
     <html>
-      <head>
-        <!-- character set your document should use to UTF-8 -->
-        <meta charset="utf-8">
-        <title>My test page</title>
-      </head>
-      <body>
-        <img src="images/firefox-icon.png" alt="My test image">
-      </body>
+        <head>
+            <meta charset="utf-8">
+            <title>Title of Browser</title>
+        </head>
+        <body>
+            <img src="img.png" alt="alternate text">
+        </body>
     </html>
     ```
 
@@ -31,14 +23,21 @@
     - `<title>` titel of page shown in browser
     - `<body>` container for contents to show, only 1
 
+### 1.1.1. Element
+
+1. Structure: `<tag key="value"> content </tag>`
+    - tag
+        - opening tag (required)
+        - closing tag (optional)
+        - attributes (optional)
+    - content (optional)
+
 1. Marking up text
-    - headings
-    - paragraphs
-    - lists: ul/ol
+    - `<h1>` headings
+    - `<p>` paragraphs
+    - `<ul>`, `<ol>` list and `<li>` item
 
-1. HTML element reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element
-
-1. Common elements
+1. Common elements summary
     - `<h1>` headings, 1-6, block level e (new line)
     - `<p>` paragraph, block level e (new line)
     - `<ul>` / `<ol>` : `<li>`
@@ -46,74 +45,143 @@
     - `<div>` group things together, block level e (new line)
     - `<span>` group things together, inline
 
+1. HTML element reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+
+### 1.1.2. Attribute
+
+1. Common attibute summary
+    - `src`
+    - `href`
+
 1. Attribute reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
 
-1. Common attibute
-    - `src` in <img> ... 
-    - `href` in <a>
+## 1.2. Element Bundles
 
-## 1.1. Tables
+### 1.2.1. Tables
+
+1. Structure:
+    - `<table>` table root
+        - `<thead>` header region
+            - `<tr>` header row
+                - `<th>` data cell (`<td>` + `<b>`)
+        - `<tbody>` body region
+            - `<tr>` body row
+                - `<td>` data cell
 
 1. Table reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table
 
-1. `<thead>` also needs `<tr>` inside
-    - `<th>`: `<td>` + `<b>`
+### 1.2.2. Form
 
-## 1.2. Forms
+1. Structure
+    - `<form>` form root
+        - `<lable>` lable for input field
+        - `<input>` input field
+        - `<button>` action button (can also be `<input>`)
 
 1. `<form>`, block level element
     - Attribute
-        - action: addr the form send data to
+        - action: address the form send data to
         - method: HTTP method
     - contents to be submitted together
 
-1. `<input type=...>`
-    - MDN input reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
-    - simple validation
-        - `required`
-        - `type` to restrict type
-    - `title`: tip when cursor is hovoring
-
-1. `<label>`
+1. `<label>` relation with `<input>`
     - `<label>text <input> </label>` no need for id to use label
     - `<label for="key">text</label>    <input id="key">`
 
-1. Radio btn
-    - `name` to connect (only can choose 1)
-    - `value` to set value
+#### 1.2.2.1. "input", "select" element
 
-1. dropdown
-    - `<select>`
+1. Common attribute
+    - `id` unique
+    - `disabled` can be input/selected
+    - `name` grouping
+    - `required` non-empty validation
+    - `title`: tip when cursor is hovoring
+    - `type=...` type & native validation
+    - `value`
 
-1. textarea
+1. Common `input[type]` and specific attribute
+    - "checkbox"
+    - "email" 
+    - "password"
+        - `pattern` regex
+    - "radio"
+        - `name` to group
+        - `value` to set value
+    - "text"
 
-1. Checkbox
+1. "select": dropdown menu
+    - `option` to add option
+    - common attribute
+        - "disabled" use with "selected" for placeholder 
+        - "selected"
 
-check box
+1. input element reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
 
-1. MDN
-    - web dev wiki
 
-# 2. CSS Intro
+# 2. CSS
 
-1. CSS: cascading style sheets
+## 2.1. Structure
 
-1. General rule
-    - duplicate css => last one take effects
+1. CSS (cascading style sheets) document
 
-```css
-selector {
-    property1: value;
-    property2: value;
-}
-```
+    ```css
+    selector {
+        property1: value;
+        property2: value;
+    }
+    ```    
 
 1. Location
     - Inline: tedias, every element
     - `<style type="text/css">` seperated, better but still in html file, GOOD for debugging
     - `<link rel="stylesheet" type="text/css" href>` Best, seperate file
 
-1. Color
+## 2.2. Selector
+
+1. Basic
+    - `type_sel` tag name
+    - `.class_sel` group hook for elements
+    - `#id_sel` unique hook for 1 element
+    - `element[attr]` obj have the given attr
+    - `*` star, select all obj
+
+1. Grouping
+    - `#id, .class, type` multi "OR", seperated by ","
+    - `e[attr1][attr2]` multi-attribute "AND"
+
+1. Combinators
+    - `parent child` descendant in any level, seperated by " "
+    - `parent > child` direct child (not recursively), seperated by ">"
+    - `e1 ~ e2` general sibling, e2 FOLLOWS e1 and have same parent
+    - `d1 + e2` adjacent sibling, e2 IMMEDIATELY FOLLOWS e1 and have same parent
+
+1. Pseudo
+    - classes: function, dynamic (take bonas quiz 1 for example)
+        - `ul:nth-of-type()` n-th element
+            - `:nth-of-type(n)` n-th element
+            - `:nth-of-type(even)` even element
+        - `hover`
+        - `visited`
+
+1. MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
+
+
+## 2.3. Inheritance and specify
+
+1. specifity:
+    - weight of selector, only applies when targeted by multiple CSS declarations
+    - increase of specifity
+        - `*` universal
+        - `tag`, `::before` pseudo element
+        - `.class`, `[type="radio"]` attr, `:hover` pseudo class
+        - `#id`
+    - all same -> apply last
+
+1. MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
+
+## 2.4. Common property
+
+1. color
     - build-in: hard to remembrer name => good for debugging
     - Hexadecimal:
         - `#rrggbb` each 2 digit for r, g, b channel
@@ -125,44 +193,6 @@ selector {
 1. border:
     - color, width, style: all required
     - `border [width] [style] [color]` shortcut of above, no comma between properties
-
-1. Common selectors
-    - MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
-    - Basic
-        - `type_sel` tag name
-        - `.class_sel` group hook for elements
-        - `#id_sel` unique hook for 1 element
-        - `element[attr]` obj have the given attr
-        - `*` star, select all obj
-    - Grouping
-        - `#id, .class, type` multi "OR", seperated by ","
-        - `e[attr1][attr2]` multi-attribute "AND"
-    - Combinators
-        - `parent child` descendant in any level, seperated by " "
-        - `parent > child` direct child (not recursively), seperated by ">"
-        - `e1 ~ e2` general sibling, e2 FOLLOWS e1 and have same parent
-        - `d1 + e2` adjacent sibling, e2 IMMEDIATELY FOLLOWS e1 and have same parent
-    - Pseudo
-        - classes: function, dynamic (take bonas quiz 1 for example)
-            - `ul:nth-of-type()` n-th element
-                - `:nth-of-type(n)` n-th element
-                - `:nth-of-type(even)` even element
-            - `hover`
-            - `visited`
-
-1. Inheritance and specify
-    - specifity: https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity
-        - weight of selector, only applies when targeted by multiple CSS declarations
-        - increase of specifity
-            - `*` universal
-            - `tag`, `::before` pseudo element
-            - `.class`, `[type="radio"]` attr, `:hover` pseudo class
-            - `#id`
-        - all same -> apply last
-
-
-1. common property
-    - `text-decoration`
-        - `line-through` strick text out
-
-1. Checkbox elements cannot be styled directly.
+    
+1. text-decoration
+    - `line-through` strick text out
