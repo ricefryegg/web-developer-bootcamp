@@ -1,0 +1,27 @@
+/* center text */
+h1 {
+    text-align: center;
+}
+
+/* center table, DON't use "align" attribute */
+table {
+    margin: auto;
+}
+
+/* fix td size */
+td {
+    width: 5.0em;
+    height: 5.0em;
+}
+
+/* draw vertical borders */
+.vertical {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+/* draw horizontal borders */
+.horizontal {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}

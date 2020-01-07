@@ -49,9 +49,12 @@
 
 ### 1.1.2. Attribute
 
-1. Common attibute summary
-    - `src`
-    - `href`
+1. class: grouping
+    - multiple: `<td class="c1 c2 c3">`
+
+1. name
+
+1. id
 
 1. Attribute reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes
 
@@ -196,3 +199,48 @@
     
 1. text-decoration
     - `line-through` strick text out
+
+## 2.5. Font
+
+1. font-family
+    - OS wise supporting
+
+1. font-size
+    - approach
+        - keyword
+        - px
+        - em: parent font-size, default 16px
+    - MDN
+
+1. font-weight: thickness
+    - keyword
+    - numeric: 100-800 (some fonts)
+
+1. line-height: ratio
+
+1. text-align
+
+1. text-decoration
+    - underline
+    - line-through
+
+1. Embed Google fonts: https://fonts.google.com/
+
+
+## 2.6. Box Model
+
+1. element is represented as a rectangular box
+    - margin: between border, other element
+        - `margin: [top] [r] [b] [l]`
+        - `margin: [top&b] [l&r]`
+        - `margin: 1px`
+        - `margin-left:`
+        - `margin: auto`: center element
+    - border
+        - `border [width] [style] [color]`
+    - padding: between border, content
+        - `padding: [top] [r] [b] [l]`
+        - `padding: 1px`
+        - `padding-left: `
+    - content
+        - `width/height: 50`
