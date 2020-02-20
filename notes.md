@@ -39,6 +39,7 @@
 
 1. Common elements summary
     - `<h1>` headings, 1-6, block level e (new line)
+        - Usually 1 `<h1>` only
     - `<p>` paragraph, block level e (new line)
     - `<ul>` / `<ol>` : `<li>`
         - multi-level INSIDE the parent element
@@ -166,6 +167,9 @@
         - `hover`
         - `visited`
 
+1. Tip
+    - Inspector tool for precise selection.
+
 1. MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors
 
 
@@ -195,12 +199,24 @@
 
 1. border:
     - color, width, style: all required
-    - `border [width] [style] [color]` shortcut of above, no comma between properties
+    - `border [width] [style] [color]` shortcut of above, no comma
     
 1. text-decoration
     - `line-through` strick text out
 
-## 2.5. Font
+1. float
+
+## 2.5. Background
+
+1. No repeating bg img:
+
+``` css
+html {
+    height: 100%;
+}
+```
+
+## 2.6. Font
 
 1. font-family
     - OS wise supporting
@@ -224,14 +240,17 @@
     - underline
     - line-through
 
+1. text-shadow: x-div, y-div, radius, color
+    - can set multiple shadows in the same line
+
 1. Embed Google fonts: https://fonts.google.com/
 
 
-## 2.6. Box Model
+## 2.7. Box Model
 
 1. element is represented as a rectangular box
     - margin: between border, other element
-        - `margin: [top] [r] [b] [l]`
+        - `margin: [top] [r] [bottom] [l]`
         - `margin: [top&b] [l&r]`
         - `margin: 1px`
         - `margin-left:`
@@ -239,8 +258,73 @@
     - border
         - `border [width] [style] [color]`
     - padding: between border, content
-        - `padding: [top] [r] [b] [l]`
+        - `margin: [top] [r] [bottom] [l]`
         - `padding: 1px`
         - `padding-left: `
     - content
         - `width/height: 50`
+
+1. Responsive vertical margin/padding
+    - `margin-top / margin-bottom`, `padding-top / padding-bottom` are relative to width of containing block!
+
+
+# 3. Bootstrap
+
+A front-end library, fast prototype, responsive
+
+## 3.1. Components
+
+1. Button: class based style
+    - `.btn`: bind with Bootstrap button
+    - `.btn-default`: color
+    - `.btn-lg`: size
+
+1. Jumbotron
+
+1. Container
+    - fast nice space and center
+
+1. Form
+    - `.form-control`: make inputs bootstrap binded
+    - `.form-group`: spacing
+    - `.form-inline`: inline form
+
+1. Navbar
+    - `.nav navbar-collapse`: contents to collapse
+    - Hamburger button to expand
+        - `.navbar-toggle collapsed`
+        - `#data-target`
+    - `navbar-fixed-top`: padding 70px
+
+1. Thumbnail
+    - `.thumbnail`
+
+## 3.2. Grid system
+
+1. Purpose
+    - Responsive for diff screen size
+    - Split between 12 columns
+
+1. Gird size: 
+    - 4 sizes -> 4 layout
+        - `.col-xs-` 
+        - `.col-sm-`
+        - `.col-md-`
+        - `.col-lg-`
+    - Small to large size layout inheritance
+
+1. Nested grids
+    - Sub-level `<div>` can be split in two further 4 sizes
+
+## 3.3. Reference
+
+1. Doc
+    - 3.3.7: https://getbootstrap.com/docs/3.3/
+    - Up to date: https://getbootstrap.com/docs/
+
+
+# 4. Resources
+
+## 4.1. Icon
+
+1. Font awesome: https://use.fontawesome.com/releases/v5.11.2/css/all.css
