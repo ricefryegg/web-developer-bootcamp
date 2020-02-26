@@ -316,7 +316,75 @@ A front-end library, fast prototype, responsive
 1. Nested grids
     - Sub-level `<div>` can be split in two further 4 sizes
 
-## 3.3. Reference
+## 3.3. Bootstrap 4
+
+1. Differences and migration: https://getbootstrap.com/docs/4.4/migration/
+    - Primary unit to `rem`(#times of root `.font-size`) from `px`
+    - Global font-size to `16px` from `14px`d
+    - Grid system
+        - Move to Flexbox
+        - 5 sizes -> 5 layout
+    - Cards replaced panels, thumbnails and wells
+    - Colors scheme unified: more contextual and background
+    - Blockquote
+
+1. Spacing Utilities helper class
+    - Border / margin: add, subtract, color, radius
+    - Dynamic according to size (`breakpoint` is sm, md, lg, or xl)
+        - `{property}{sides}-{size}` for xs
+        - `{property}{sides}-{breakpoint}-{size}` for sm, md, lg, and xl.
+    - Inheritance: small to large.
+    - ref: https://getbootstrap.com/docs/4.4/utilities/spacing/
+
+1. Display Utilities
+    - Hide / display at different size
+    - `.d-{value}` for xs
+    - `.d-{breakpoint}-{value}` for sm, md, lg, and xl.
+
+1. Navbar
+    - `.navbar-expand-{breakpoint}`: expand at breakpoint
+    - `.navbar-{color}`, `.bg-{color}`: color of text and bg
+    - Flexbox enabled by default
+
+### 3.3.1. Flexbox
+
+1. Alignment
+    - `justify-content-{breakpoint}-{}`: horizontal align
+        - start(default), end, center, around, between
+    - `align-items-{breakpoint}-{}`: vertical align
+        - start(default), end, center
+
+1. Sequence
+    - `flex-row-{}`: None, reverse
+    - `flex-column-{}`: None, reverse
+
+### 3.3.2. Grid System
+
+1. Gird size: still add to 12
+    - 5 sizes -> 5 layout
+        - `.col-` (default, xs)
+        - `.col-sm-` -> `.col-xs-` in bs3
+        - `.col-md-` -> `.col-sm-` in bs3
+        - `.col-lg-` -> `.col-md-` in bs3
+        - `.col-xl-` -> `.col-lg-` in bs3
+    - Small to large size layout inheritance
+    - default take all 12 cols
+
+1. CDN
+
+```html
+<!-- Style sheet -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- js lib -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+```
+
+### 3.3.3. Card
+
+## 3.4. Reference
 
 1. Doc
     - 3.3.7: https://getbootstrap.com/docs/3.3/
