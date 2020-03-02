@@ -346,13 +346,20 @@ A front-end library, fast prototype, responsive
     - `.navbar-{color}`, `.bg-{color}`: color of text and bg
     - Flexbox enabled by default
 
+1. Containers
+    - `.container` have space in margin
+    - `.container-fluid` no margin space (responsive)
+
 ### 3.3.1. Flexbox
 
 1. Alignment
-    - `justify-content-{breakpoint}-{}`: horizontal align
-        - start(default), end, center, around, between
-    - `align-items-{breakpoint}-{}`: vertical align
-        - start(default), end, center
+    - control contents
+        - `justify-content-{breakpoint}-{}`: horizontal align
+            - start(default), end, center, around, between
+        - `align-items-{breakpoint}-{}`: vertical align
+            - start(default), end, center
+    - overwrite in child
+        - `align-self-{}`: overwrite `align-items` in parent
 
 1. Sequence
     - `flex-row-{}`: None, reverse
@@ -390,9 +397,171 @@ A front-end library, fast prototype, responsive
     - 3.3.7: https://getbootstrap.com/docs/3.3/
     - Up to date: https://getbootstrap.com/docs/
 
+# 4. React
 
-# 4. Resources
+## 4.1. Intro
 
-## 4.1. Icon
+1. Start a Python http server at current folder
+    - `python -m http.server`
+
+## 4.2. official tutorial
+### 4.2.1. Create React App on local machine
+
+```sh
+npx create-react-app my-app
+```
+
+Common component:
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './...css';
+```
+
+### 4.2.2. React Component
+
+A component takes in params called *__props__*
+
+#### 4.2.2.1. Class Component
+
+``` js
+// each square of the board
+class Square extends React.Component {
+  // 1. constructor:
+  //    - always call super when defining the constructor of a subclass
+  //    - store state: this.state
+  // 2. to change state (convention):
+  //    - this.setState({key : val})
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
+  // render square
+  render() {
+    return (
+      <button 
+        className="square" 
+        onClick={() => this.setState({value: 'X'})}
+      >
+        {this.state.value}
+      </button>
+    );
+  }
+}
+
+class Board extends React.component {
+  renderSquare(i) {
+    return <Square value={i} />;
+  }
+}
+```
+
+#### 4.2.2.2. Lifting state up
+
+1. Avoid ask states from child
+    - difficult to understand
+    - susceptible to bugs
+    - hard to refactor
+
+1. Best approach To interact with multiple children data
+    - tell child what to do by passing a prop
+    - keeps the child components in sync with each other and with the parent component.
+
+1. When lifting functions up, possibly creating closures.
+
+```js
+class Square extends React.Component {
+  render() {
+    return (
+      <button 
+        className="square" 
+        onClick={this.props.onClick}
+      >
+        {this.props.value}
+      </button>
+    );
+  }
+}
+
+
+class Board extends React.Component {
+  // lift child state to common parent
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares : Array(9).fill(null),
+    }
+  }
+
+  // click action
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = 'X';
+    this.setState({squares : squares});
+  }
+
+  // click action also lifted up
+  // coz modify boards state now
+  renderSquare(i) {
+    return (
+      <Square 
+        value={this.state.squares[i]} 
+        onClick = {() => this.handleClick(i)}
+      />
+    );
+  }
+  
+  // render board
+  render() {
+    const status = 'Next player: X';
+
+    return (
+      <div>
+        <div className="status">{sttaus}</div>
+        <div className="board-row">
+          {this.renderSquare(0)}
+          .....
+        </div>
+        <div className="board-row">...</div>
+        <div className="board-row">...</div>
+      </div>
+    );
+  }
+}
+```
+
+#### 4.2.2.3. Function Components
+
+1. Simpler, better way for stateless components.
+
+```js
+// Square component is stateless after "lift-up"
+class Square extends React.Component {
+  render() {
+    return (
+      <button className="square" onClick={this.props.onClick}>
+        {this.props.value}
+      </button>
+    );
+  }
+}
+
+// refactor as a function component, simpler
+funciton Square(props) {
+  return (
+      <button className="square" onClick={props.onClick}>
+        {props.value}
+      </button>
+  );
+}
+```
+
+# 5. Resources
+
+## 5.1. Icon
 
 1. Font awesome: https://use.fontawesome.com/releases/v5.11.2/css/all.css
