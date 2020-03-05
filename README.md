@@ -473,6 +473,14 @@ html {
 
     - Elements can be diff data type
 
+1. Method
+    - `.forEach` loop: callback function (like Ruby)
+        - Callback function args: `element, ?index, ?arr`
+
+        ```js
+        arr.forEach( (e, i, arr) => { x...; i... ; arr...; } );
+        ```
+
 1. Properties
     - `.length`
 
@@ -498,6 +506,8 @@ html {
 
 1. Declaration vs. expression
     - https://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/
+
+
 
 
 ## 3.4. Chrome
