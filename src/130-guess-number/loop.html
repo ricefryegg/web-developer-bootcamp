@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While loop</title>
+</head>
+<body>
+    <h1>While loops problemset</h1>
+
+    <ol>
+        <li>Numbers between -10 and 19</li>
+        <p id="1"></p>
+        <li>Even numbers between 10 and 40</li>
+        <p id="2"></p>
+        <li>odd numbers between 300 and 333</li>
+        <p id="3"></p>
+        <li>numbers divisible by 5 && 3 between 5 and 50</li>
+        <p id="4"></p>
+    </ol>
+
+</body>
+
+<script>
+
+const q1 = document.getElementById("1");
+
+for (let i = -10; i <= 19; i++) {
+    q1.textContent += `${i}, `; 
+}
+
+const q2 = document.getElementById("2");
+
+for (let i = 10; i <= 40; i += 2) {
+    q2.textContent += `${i}, `;
+}
+
+const q3 = document.getElementById("3");
+
+for (let i = 301; i <= 333; i++) {
+    if (i % 2 !== 0) {q3.textContent += `${i}, `}
+}
+
+const q4 = document.getElementById("4");
+
+for (let i = 5; i <= 50; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+        q4.textContent += `${i}, `
+    }
+}
+
+</script>
+</html>

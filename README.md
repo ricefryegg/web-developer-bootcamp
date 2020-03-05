@@ -267,12 +267,256 @@ html {
 1. Responsive vertical margin/padding
     - `margin-top / margin-bottom`, `padding-top / padding-bottom` are relative to width of containing block!
 
+# 3. JavaScript
 
-# 3. Bootstrap
+## 3.1. Data Structure
+
+### 3.1.1. Primitives
+
+1. Five primitives
+    - number
+    - string
+    - boolean
+    - null
+        - None
+    - undefined
+        - declared but not defined
+
+1. Common Methods
+    - `.toString()` convert to string
+    - `.valueOf()` convert to number
+
+1. Variable: `var name = val`
+    - Not type fixed
+
+#### 3.1.1.1. Number
+
+1. Always 64-bit float, 1 sign + 52 mantissa + 11 exponent
+    - Integers are accurate for up to 15 digits.
+    - The max number of decimals is 17
+    - Convert to _int_ for serious calculation, float arithmetic is not always accurate, then convert back:
+
+        ```js
+        var x = 0.2 + 0.1;                  // 0.30000000000000004
+        var x = (0.2 * 10 + 0.1 * 10) / 10; // 0.3
+        ```
+
+1. Operators: 
+    - `+, -, *, /, %, **`
+    - In(/de)creament: `++, --`, both front/end ok
+
+1. Addition and concatenation
+    - `+`: left-side domination:
+
+        ```JS
+        var x = 10, y = 20, z = "30";
+        var res = x + y + z             // "3030"
+        var res = z + x + y             // "301020"
+        ```
+
+    - Operators other than `+` :try to convert to number
+
+        ```JS
+        var x = "100", y = "10";
+        var z = x + y                   // "10010"
+        var z = x - y                   // 90
+        var z = x * y                   // 1000.
+        var z = x / y                   // 10
+
+    - Force convertion to number: unary operators
+
+        ```js
+        var z = (+x) + (+y)             // 110
+        var z = (+"100") + (+"10")      // 110, only first brackets can be ommited
+
+        var x = + "100", y = + "10";    // 100, 10
+        var z = x + y                   // 110
+        ```
+
+
+1. Methods
+    - `(123).toExponential(n)` exp notation, round for n digits, default no round.
+    - `(123).toFixed(n)`       fixed length decimal, round for n digits, default no decimal
+    - `(123).toPrecision(arg)` fixed length number, round for n digits, default no round.
+
+    > Comparison: "und" for undefind
+
+    n   | (9.66).toExponential(n) | (9.66).toFixed(n) | (9.66).toPrecision(n)
+    --- | ---                     | ---               | ---
+    und | 9.66e+0                 | 10                | 9.66
+    1   | 9.7e+0                  | 9.7               | 1e+1
+    3   | 9.6600e+0               | 9.6600            | 9.660
+
+
+1. Convert to Number
+    - `Number(x)`               type conversion, == unary `+` opr
+    - `parseInt(str, ?radix)`   parse to integer with radix, ignore exp notation
+    - `parseFloat(str)`         parse to float
+
+    > Comparision
+
+    str                      | Number(str)   | parseInt(str)
+    ---                      | ---           | ---
+    `"20px"`                 | NaN           | 20
+    `"010"`                  | 10            | 8 (`radix=10` => 10)
+    `"0xF"`                  | 15            | 15
+    `"2e1"`                  | 20            | 2
+    `true`                   | 1             | NaN
+    `new Date("2017-09-30")` | 1506729600000 | NaN
+
+
+1. "Number" class properties
+    - `Number.MAX_VALUE`
+    - `Number.MIN_VALUE`
+    - `Number.POSITIVE_INFINITY` => `Infinity`
+    - `Number.NEGATIVE_INFINITY` => `-Infinity`
+    - `Number.NaN` "Not-a-Number", `var x = 100 / "Apple";`
+
+#### 3.1.1.2. String
+
+1. Quote:
+    - Double / single valid.
+    - Escape: `\`
+
+1. Methods
+    - Find a substr: return index or -1
+        - `.indexOf(x, ?i)`     FIRST, from `start` foward,   include `i`.
+        - `.lastIndexOf(x, ?i)` LAST,  from `start` backward, include `i`.
+        - `.search(x)`          FIRST or regEx
+
+    - Slice
+
+        Method               | Pos index   | Neg index
+        ---                  | ---         | ---
+        `.slice(i, ?j)`      | s[i, j)     | backwards
+        `.substring(i, ?j)`  | s[i, j)     | not accepted
+        `.substr(i, ?l)`     | s[i, i + l) | s[i, i - l]
+
+    - Extract
+        - `.charAt(i)`     char        or empty str
+        - `.charCodeAt(i)` UTF-16 char or empty str
+        - `s[i]`           char        or `undefined`, ES5+, read only (no error)
+
+    - Replace
+        - `.replace(x, y)`
+            - `x`: specific val: first match
+            - `x`: regEx, between `//`
+                - `//i`: match first
+                - `//g`: match all
+
+    - Split: return an array
+        - `.split(x)`  split on `x`.
+        - `.split("")` split each char.
+        - `s.split()`  `[s]`
+
+1. Property
+    - `.length`
+
+1. Template literals: string w/ embedded exp
+    - ``text ${exp}``
+    - Multiline
+
+        ```js
+        console.log(`\
+        string text line 1
+        string text line 2`);
+        ```
+
+    - Nesting
+
+        ```js
+        const x = `do ${eat() ? 'eat' : 
+            `not ${notDrink() ? 'drink': 'dehydrate'}`}`
+        ```
+
+    - Tagged templates: customized parsing
+
+#### 3.1.1.3. Boolean
+
+1. Operator
+    - Comparison
+        - `>, >=, <, <=, ==, !=` value only, because of type Coercion
+        - `===, !==` value and type
+    - Logical
+        - `&&, ||, !`
+
+1. Truthy / falsy vals for logical ops
+    - Falthy
+        - false
+        - 0
+        - ""
+        - null
+        - undefined
+        - NaN
+    - Truthy: everything else
+
+1. wtf
+
+    ```js
+    true == "1"         // true, all other but 1 are false
+
+    null == undefined   // true
+
+    Nan == Nan          // false
+    ```
+
+### 3.1.2. Arrays
+
+1. Create
+    - Use `var arr = [item1, item2, ...]`
+    - DO NOT use `Array()`, causing confusion.
+
+        ```js
+        var arr = new Array(10, 11)   // [10, 11]
+        var arr = new Array(10)       // [empty × 2]
+        ```
+
+    - Elements can be diff data type
+
+1. Properties
+    - `.length`
+
+1. WTF:
+
+    ```js
+    arr = [1, 2];
+    arr["test"]
+    ```
+
+
+
+## 3.2. Control Flow
+
+1. Conditional
+    - `if ... else if ... else`
+
+1. Loop
+    - `while (<condition>) {<body>}`
+    - `for (<init>; condition; step) {<body>}`
+
+## 3.3. Function
+
+1. Declaration vs. expression
+    - https://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/
+
+
+## 3.4. Chrome
+
+1. Built-in methods
+    - `alert`
+    - `console.log`
+    - `prompt`      get input
+
+1. Console
+    - Always return the last value eval-ed
+
+## 3.5. JS WTF
+
+# 4. Bootstrap
 
 A front-end library, fast prototype, responsive
 
-## 3.1. Components
+## 4.1. Components
 
 1. Button: class based style
     - `.btn`: bind with Bootstrap button
@@ -299,7 +543,7 @@ A front-end library, fast prototype, responsive
 1. Thumbnail
     - `.thumbnail`
 
-## 3.2. Grid system
+## 4.2. Grid system
 
 1. Purpose
     - Responsive for diff screen size
@@ -316,7 +560,7 @@ A front-end library, fast prototype, responsive
 1. Nested grids
     - Sub-level `<div>` can be split in two further 4 sizes
 
-## 3.3. Bootstrap 4
+## 4.3. Bootstrap 4
 
 1. Differences and migration: https://getbootstrap.com/docs/4.4/migration/
     - Primary unit to `rem`(#times of root `.font-size`) from `px`
@@ -350,7 +594,7 @@ A front-end library, fast prototype, responsive
     - `.container` have space in margin
     - `.container-fluid` no margin space (responsive)
 
-### 3.3.1. Flexbox
+### 4.3.1. Flexbox
 
 1. Alignment
     - control contents
@@ -365,7 +609,7 @@ A front-end library, fast prototype, responsive
     - `flex-row-{}`: None, reverse
     - `flex-column-{}`: None, reverse
 
-### 3.3.2. Grid System
+### 4.3.2. Grid System
 
 1. Gird size: still add to 12
     - 5 sizes -> 5 layout
@@ -389,23 +633,25 @@ A front-end library, fast prototype, responsive
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 ```
 
-### 3.3.3. Card
+### 4.3.3. Card
 
-## 3.4. Reference
+## 4.4. Reference
 
 1. Doc
     - 3.3.7: https://getbootstrap.com/docs/3.3/
     - Up to date: https://getbootstrap.com/docs/
 
-# 4. React
 
-## 4.1. Intro
+
+# 5. React
+
+## 5.1. Intro
 
 1. Start a Python http server at current folder
     - `python -m http.server`
 
-## 4.2. official tutorial
-### 4.2.1. Create React App on local machine
+## 5.2. official tutorial
+### 5.2.1. Create React App on local machine
 
 ```sh
 npx create-react-app my-app
@@ -419,11 +665,11 @@ import ReactDOM from 'react-dom';
 import './...css';
 ```
 
-### 4.2.2. React Component
+### 5.2.2. React Component
 
 A component takes in params called *__props__*
 
-#### 4.2.2.1. Class Component
+#### 5.2.2.1. Class Component
 
 ``` js
 // each square of the board
@@ -460,7 +706,7 @@ class Board extends React.component {
 }
 ```
 
-#### 4.2.2.2. Lifting state up
+#### 5.2.2.2. Lifting state up
 
 1. Avoid ask states from child
     - difficult to understand
@@ -534,7 +780,7 @@ class Board extends React.Component {
 }
 ```
 
-#### 4.2.2.3. Function Components
+#### 5.2.2.3. Function Components
 
 1. Simpler, better way for stateless components.
 
@@ -560,8 +806,12 @@ funciton Square(props) {
 }
 ```
 
-# 5. Resources
+# 6. Philosophy
 
-## 5.1. Icon
+1. DRY: don't repeat yourself.
+
+# 7. Resources
+
+## 7.1. Icon
 
 1. Font awesome: https://use.fontawesome.com/releases/v5.11.2/css/all.css
