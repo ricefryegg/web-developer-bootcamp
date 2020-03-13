@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .winner {
+      color:green;
+    }
+  </style>
+
+  <title>Score Keeper</title>
+</head>
+
+<body>
+  <h1><span id="p1Display"></span> to <span id="p2Display"></span></h1>
+
+  <p>Playing to: <span></span></p>
+
+  <div>
+    <input type="number" id="numInput">
+
+    <button id="p1Button">Player One</button>
+    <button id="p2Button">Player Two</button>
+    <button id="reset">Reset</button>
+
+  </div>
+
+</body>
+
+<script>
+var p1Score   = 0;
+var p1Button  = document.querySelector("#p1Button");
+var p1Display = document.querySelector("#p1Display");
+
+var p2Score   = 0;
+var p2Button  = document.querySelector("#p2Button");
+var p2Display = document.querySelector("#p2Display");
+
+var WIN_SCORE = 5;
+var winScoreDisplay = document.querySelector("p span");
+var numInput  = document.querySelector("#numInput");
+
+var GAME_OVER = false;
+var resetButton = document.querySelector("#reset");
+
+// init
+
+var init = () => {
+  GAME_OVER = false;
+  numInput.value = WIN_SCORE;
+  winScoreDisplay.textContent = WIN_SCORE;
+
+  p1Score = 0;
+  p1Display.textContent = p1Score;
+  p1Display.classList.remove("winner");
+
+  p2Score = 0;
+  p2Display.textContent = p2Score;
+  p2Display.classList.remove("winner");
+
+}
+
+window.addEventListener("load", init);
+
+// play
+
+numInput.addEventListener("change", () => {
+  WIN_SCORE = Number(numInput.value);     // can't use "this" if in arrow fn
+  winScoreDisplay.textContent = WIN_SCORE;
+
+  init();  // init whenever change the target score
+})
+
+p1Button.addEventListener("click", () => {
+  if (!GAME_OVER) {
+    p1Score++; 
+    p1Display.textContent = p1Score;
+
+    if (p1Score === WIN_SCORE) {
+      p1Display.classList.add("winner");
+      GAME_OVER = true;
+    }
+  }
+})
+
+p2Button.addEventListener("click", () => {
+  if (!GAME_OVER) {
+    p2Score++; 
+    p2Display.textContent = p2Score;
+
+    if (p2Score === WIN_SCORE) {
+      p2Display.classList.add("winner");
+      GAME_OVER = true;
+    }
+  }
+})
+
+resetButton.addEventListener("click", init);
+
+</script>
+
+</html>

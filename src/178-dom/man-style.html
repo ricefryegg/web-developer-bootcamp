@@ -1,0 +1,113 @@
+<!-- HTML, CSS, JavaScript for structure, presentation, behavior SEPERATELY. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Demo</title>
+</head>
+
+<body>
+  <h1 id="highlight">Welcome to MY DOM Demo</h1>
+  <p>Corgi mixes are <strong>super</strong> adorable</p>
+
+  <a href="www.google.com">LINK TO GOOGLE</a>
+
+  <ul>
+    <li>Orchids</li>
+    <li>Succulents</li>
+    <li>Tulips</li>
+  </ul>
+
+  <img src="https://static.boredpanda.com/blog/wp-content/uploads/2017/05/corgi-mix-cross-breeds-18-591c39272d49f__605.jpg">  
+  <img src="https://petstruggles.com/wp-content/uploads/2019/08/Best_Dog_Brush_for_Corgi_Pet_Struggles-1024x658.jpg">
+
+</body>
+
+<style>
+  .some-class {
+    color: blue;
+    border: 10px solid red;
+  }
+
+  .big {
+    font-size: 100px;
+    color: orange;
+    border: 5px solid red;
+  }
+
+  img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 0px 10px 0px 0px;
+
+    height: 300px;
+  }
+</style>
+
+<script>
+
+  // == change style ==
+
+  var h1 = document.querySelector("#highlight");
+  h1.classList.add("some-class");
+
+  var p = document.querySelector("p");
+  p.classList.add("big");
+  p.classList.toggle("big");
+
+
+  // == change content ==
+
+  var p = document.querySelector("p");
+
+  // p.textContent = "This is plain text only";
+  // p.innerHTML = "This is <strong>innerHTML</strong>";
+
+  // document.body.textContent = "<h1>Cleared!</h1>";
+  // document.body.innerHTML = "<h1>Cleared!</h1>";
+
+
+  // == change attribute ==
+
+  var img1 = document.querySelector("img");
+
+  img1_src = img1.getAttribute("src")
+  console.log(img1_src);
+
+  img1.setAttribute("src", "https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png");
+
+
+  var a = document.querySelector("a");
+
+  a.setAttribute("href", "http://www.corgis.com")
+
+  // a.textContent = "LINK TO CORGIS.COM";
+  a.innerText = "LINK TO CORGIS.COM";
+
+
+  // == Events ==
+
+  h1.addEventListener("click", () => {
+    h1.style.background = "orange";
+    // alert("h1 was clicked!");
+  });
+
+  document.querySelector("ul").addEventListener("click", () => {
+    console.log("YOU CLICKEd THE UL!")
+  })
+
+  var lis = document.querySelectorAll("li");
+
+  for (var i = 0; i < lis.length; i++) {
+    lis[i].addEventListener("click", function() {   // can't use arrow funciton
+      this.style.color = "pink";
+      console.log(this);  // can't use lis[i] replace this, because i is already 3
+    });
+  }
+
+</script>
+
+</html>

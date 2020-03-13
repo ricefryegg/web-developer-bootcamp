@@ -439,6 +439,9 @@ html {
         - `===, !==` value and type
     - Logical
         - `&&, ||, !`
+    - Ternary
+        - `varName = condition ? <true action> : <false action>`
+        - `condition ? <true action> : <false action>`
 
 1. Truthy / falsy vals for logical ops
     - Falthy
@@ -493,6 +496,24 @@ html {
 
 
 
+### 3.1.3. Object
+
+1. Init
+    - `var obj = {}`
+    - `var obj = {...:..., }`
+    - `var obj = new Object()`
+
+1. No require for datatype uniformity
+
+1. Dot notation
+    - Not work for
+        - Starting with number
+        - property name with space
+
+1. Method:
+    - `this`
+
+
 ## 3.2. Control Flow
 
 1. Conditional
@@ -502,25 +523,106 @@ html {
     - `while (<condition>) {<body>}`
     - `for (<init>; condition; step) {<body>}`
 
-## 3.3. Function
+## 3.3. Integrated Library
+
+1. Math
+    - `.random()` random number (0, 1)
+    - `.floor()`  get integer part
+
+## 3.4. Scope
+
+
+## 3.5. Function
 
 1. Declaration vs. expression
     - https://javascriptweblog.wordpress.com/2010/07/06/function-declarations-vs-function-expressions/
 
+1. Anonymous function vs. arrow function
+    - Arrow function == anonymous function except
+        - Can't be used as constructors
+
+            ```js
+            <!-- won't work, can't used for constructor -->
+            Array.prototype.myForEach = fn => fn(this.length);
+            ```
+
+        - Omit parentheisis when only 1 param, omit return and brackets when only return exists
+
+            ```js
+            <!-- identical -->
+            arr.map((element) => {
+                return element.length; 
+                }
+            );
+            arr.map(element => element.length);
+            ```
+
+        - Cautious when using `this`
+
+            ```js
+            fn_reg = function() { document.querySelector("#p1").innerHTML += this; }
+            fn_arrow = () =>    { document.querySelector("#p2").innerHTML += this; }
+
+            window.addEventListener("load", hello);     // owner of fn_arrow
+            document.getElementById("btn").addEventListener("click", hello);
+            ```
+
+### 3.5.1. "this" keyword
 
 
+## 3.6. DOM
 
-## 3.4. Chrome
+1. Document Object Model
+    - `<script> should be at the bottom to avoid DOM not loaded yet`
+
+1. Get elementHandle, `document` 
+    - `.querySelector`           match first, `.[class]`, `#[id]`, `[tag]`
+    - `.querySelectorAll`        match all 
+    - `.getElementById`          match one, id is unique, 
+    - `.getElementsByClassName`  match all
+    - `.getElementsByTagName`    match all
+    - Multi match returns lists instead of array, need to loop through to use
+
+1. Style: best practice of changing style in JS
+    - `[elementHandle].classList`  not array, no `.push ...`
+        - `.add`
+        - `.remove`
+        - `.toggle` turn a class on/off
+
+1. Content
+    - `[elementHandle]`
+        - `.textContent`    plain text only
+        - `.innerText`      plain text only
+        - `.innerHTML`      preserve HTML syntax
+
+1. Attribute
+    - `[elementHandle]`
+        - `getAttribute("<attr_name>")`
+        - `setAttribute("<attr_name>", "val")`
+
+### 3.6.1. Events
+
+1. Process: select element => add event listener
+    - `[elementHandle].addEventListener(eventType, fn)`
+    - Can add multi listeners to an element
+
+1. Event types
+    - mouse: `click, mouseover, mouseout`
+    - content: `change`
+    - ref: https://developer.mozilla.org/en-US/docs/Web/API/Event
+
+## 3.7. Chrome
 
 1. Built-in methods
     - `alert`
     - `console.log`
-    - `prompt`      get input
+    - `console.dir`
+    - `prompt`          get input
+    - `setInterval`     trigger a function at an interval
 
 1. Console
     - Always return the last value eval-ed
 
-## 3.5. JS WTF
 
 # 4. Bootstrap
 
@@ -819,6 +921,18 @@ funciton Square(props) {
 # 6. Philosophy
 
 1. DRY: don't repeat yourself.
+
+1. Separation of concers
+    - HTML, CSS, JavaScript for structure, presentation, behavior SEPERATELY.
+
+
+## 6.1. Design Patterns
+
+1. The way we structure code
+
+1. Module
+    - Orgnized
+    - Avoid namespace collision
 
 # 7. Resources
 

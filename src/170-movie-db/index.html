@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>movieDB</title>
+</head>
+
+<body>
+  <h1>Movie Database</h1>
+  <ol id="content"></ol>
+</body>
+
+<script>
+  movieDB = [
+    {title: "Harry Potter 1", rating: 5, hasWatched: true}, 
+    {title: "In Bruges", rating: 4, hasWatched: false}, 
+  ]
+
+  output = ""
+  movieDB.forEach(item => {
+    output += `<li>You ${item.hasWatched ? "have watched" : "have not seen"} "${item.title}" - ${item.rating} stars</li>\n`;
+  });
+
+  document.getElementById("content").innerHTML = output;
+</script>
+
+</html>
