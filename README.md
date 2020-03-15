@@ -755,15 +755,29 @@ A front-end library, fast prototype, responsive
 
 
 
-# 5. React
+# 5. Node.js
 
-## 5.1. Intro
+1. Not compatible with Google Drive Folder!
+
+## 5.1. Express
+
+1. Why express
+    - Popularity
+    - lightweight
+
+1. Skeleton
+    - In project folder `npx express-generator`
+
+
+# 6. React
+
+## 6.1. Intro
 
 1. Start a Python http server at current folder
     - `python -m http.server`
 
-## 5.2. official tutorial
-### 5.2.1. Create React App on local machine
+## 6.2. official tutorial
+### 6.2.1. Create React App on local machine
 
 ```sh
 npx create-react-app my-app
@@ -777,11 +791,11 @@ import ReactDOM from 'react-dom';
 import './...css';
 ```
 
-### 5.2.2. React Component
+### 6.2.2. React Component
 
 A component takes in params called *__props__*
 
-#### 5.2.2.1. Class Component
+#### 6.2.2.1. Class Component
 
 ``` js
 // each square of the board
@@ -818,7 +832,7 @@ class Board extends React.component {
 }
 ```
 
-#### 5.2.2.2. Lifting state up
+#### 6.2.2.2. Lifting state up
 
 1. Avoid ask states from child
     - difficult to understand
@@ -892,7 +906,7 @@ class Board extends React.Component {
 }
 ```
 
-#### 5.2.2.3. Function Components
+#### 6.2.2.3. Function Components
 
 1. Simpler, better way for stateless components.
 
@@ -918,7 +932,7 @@ funciton Square(props) {
 }
 ```
 
-# 6. Philosophy
+# 7. Philosophy
 
 1. DRY: don't repeat yourself.
 
@@ -926,7 +940,30 @@ funciton Square(props) {
     - HTML, CSS, JavaScript for structure, presentation, behavior SEPERATELY.
 
 
-## 6.1. Design Patterns
+1. 60s explaination of how Internet works
+    - DNS: domain -> IP
+    - Server:
+        - Routes to resource per HTTP request
+        - Backend: output data
+        - Frontend: construct webpage
+    - Client: display webpage
+
+1. Static vs Dynamic site:
+    - Server side page generation (send back HTML, CSS, JS)
+
+1. Generic stack
+    - Frontend:
+        - HTML, JavaScript, CSS
+        - Framework
+    - Backend
+        - Language + framework (Python + Flask / JS + Express)
+        - Server
+        - Database MySQL / MongoDB
+
+1. HTTP
+    - Address bar can only make get request
+
+## 7.1. Design Patterns
 
 1. The way we structure code
 
@@ -934,8 +971,8 @@ funciton Square(props) {
     - Orgnized
     - Avoid namespace collision
 
-# 7. Resources
+# 8. Resources
 
-## 7.1. Icon
+## 8.1. Icon
 
 1. Font awesome: https://use.fontawesome.com/releases/v5.11.2/css/all.css
