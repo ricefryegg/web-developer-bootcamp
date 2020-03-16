@@ -388,7 +388,7 @@ html {
 
         Method               | Pos index   | Neg index
         ---                  | ---         | ---
-        `.slice(i, ?j)`      | s[i, j)     | backwards
+        `.slice(i, ?j)`      | s[i, j)     | backwards      // j can be neg
         `.substring(i, ?j)`  | s[i, j)     | not accepted
         `.substr(i, ?l)`     | s[i, i + l) | s[i, i - l]
 
@@ -408,6 +408,9 @@ html {
         - `.split(x)`  split on `x`.
         - `.split("")` split each char.
         - `s.split()`  `[s]`
+    
+    - repeat:
+        - `.repeate(n)`
 
 1. Property
     - `.length`
@@ -759,6 +762,12 @@ A front-end library, fast prototype, responsive
 
 1. Not compatible with Google Drive Folder!
 
+1. package.json, to get node_modules/
+    - dependencies
+    - `npm init` create package.json
+    - `npm install --save [name] ` add to package.json
+    - `npm install -g [name] ` install on system
+
 ## 5.1. Express
 
 1. Why express
@@ -768,6 +777,32 @@ A front-end library, fast prototype, responsive
 1. Skeleton
     - In project folder `npx express-generator`
 
+
+
+
+1. Auto restart when changing:
+    - `nodemon`
+
+## 5.2. Route
+
+1. `app.[method]("[srcName]", callBackFn(req, res) {} )`
+    - req: request obj,  info of how router triggered
+    - res: response info, how to react
+
+1. Wildcard
+    - `*`
+    - Route placeholder: match a path/router patter, eg.
+        - `/:sub`: matches "/anything/" but not "/anything/else"
+        - `/:sub/:subSub`: matches "/anything/else" but not "/anything/"
+        - accessable throungh `req.params`
+    - query string
+    - body param
+
+1. Order
+    - First match reponds
+
+1. Listen to request
+    - `app.listen([port], callBackFn)`
 
 # 6. React
 
