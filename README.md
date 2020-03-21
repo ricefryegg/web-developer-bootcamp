@@ -763,10 +763,11 @@ A front-end library, fast prototype, responsive
 1. Not compatible with Google Drive Folder!
 
 1. package.json, to get node_modules/
-    - dependencies
+    - dependencies:NOT to name the project (or the folder that the project lives inside of) the same as any of the node packages being used
     - `npm init` create package.json
     - `npm install --save [name] ` add to package.json
     - `npm install -g [name] ` install on system
+    - Project names need to be all lowercase and contain url friendly characters, e.g., no spaces, instead use a hyphen.
 
 ## 5.1. Express
 
@@ -801,8 +802,30 @@ A front-end library, fast prototype, responsive
 1. Order
     - First match reponds
 
+1. .ejs file
+    - Passing var: res.render("fileName.ejs", {varInEjs: varInAppJs})
+    - To ommit ext:
+    
+        ```js
+        app.set("vioew engine", "ejs);
+        ...
+            res.render("fileName", {var: varInside});
+        ```
+
 1. Listen to request
     - `app.listen([port], callBackFn)`
+
+1. Path:for files in public/ folder
+    - User `/style.css` instead of `style.css` to fix it under root
+
+### 5.2.1. EJS
+
+1. Tag
+    - `<%- include("path/aprtial.ejs") %>` include partial
+    - `<%= %>` run and render the return value
+    - `<% %>` run the code only
+
+1. Partials
 
 # 6. React
 

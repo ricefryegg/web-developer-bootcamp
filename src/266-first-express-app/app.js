@@ -21,7 +21,7 @@ app.get("/speak/:animal", (req, res) => {
 })
 
 app.get("/repeat/:word/:num", (req, res) => {
-    var word = req.params.word + " ",
+    var word = req.params.word + " ",      
         num = Number(req.params.num)
 
     // repeate num times than slice out the last char
