@@ -812,13 +812,25 @@ A front-end library, fast prototype, responsive
             res.render("fileName", {var: varInside});
         ```
 
+### 5.2.1. POST
+
+1. Receive data: method=POST, name=key
+    - `req.body` => {key: val, ...}
+
+    ```js
+    app.use(bodyParser.urlencoded({extended: true}));
+    ...
+    app.post(..., (res, req) =>
+        req.body)
+    ```
+
 1. Listen to request
     - `app.listen([port], callBackFn)`
 
 1. Path:for files in public/ folder
     - User `/style.css` instead of `style.css` to fix it under root
 
-### 5.2.1. EJS
+### 5.2.2. EJS
 
 1. Tag
     - `<%- include("path/aprtial.ejs") %>` include partial
