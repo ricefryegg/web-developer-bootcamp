@@ -1,0 +1,17 @@
+{
+  "name": "300-postgres-test",
+  "version": "1.0.0",
+  "description": "1. Create PostgreSQL\r     - data persistence\r         - -v /host/path:/var/lib/postgresql/data\r         - --mount type=volume,src=vol_name,dst=/var/lib/postgresql/data",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "locus": "^2.0.4",
+    "pg": "^7.18.2"
+  }
+}

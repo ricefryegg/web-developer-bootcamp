@@ -415,7 +415,7 @@ html {
 1. Property
     - `.length`
 
-1. Template literals: string w/ embedded exp
+1. Template literals: string w/ embedded exp (ES6)
     - ``text ${exp}``
     - Multiline
 
@@ -677,6 +677,14 @@ A front-end library, fast prototype, responsive
 
 ## 4.3. Bootstrap 4
 
+1. CDN
+
+    ```html
+    <!-- Style sheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    ```
+
 1. Differences and migration: https://getbootstrap.com/docs/4.4/migration/
     - Primary unit to `rem`(#times of root `.font-size`) from `px`
     - Global font-size to `16px` from `14px`d
@@ -736,17 +744,6 @@ A front-end library, fast prototype, responsive
     - Small to large size layout inheritance
     - default take all 12 cols
 
-1. CDN
-
-```html
-<!-- Style sheet -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-<!-- js lib -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-```
 
 ### 4.3.3. Card
 
@@ -764,10 +761,16 @@ A front-end library, fast prototype, responsive
 
 1. package.json, to get node_modules/
     - dependencies:NOT to name the project (or the folder that the project lives inside of) the same as any of the node packages being used
-    - `npm init` create package.json
-    - `npm install --save [name] ` add to package.json
-    - `npm install -g [name] ` install on system
+    - `npm init`                        create package.json
+    - `npm install --save [name] `      add to package.json
+    - `npm install --save-dev [name] `  only add to devDependencies, 
+        - locus: freeze to debug
+    - `npm install -g [name] `          install on system
+        - nodemon: auto restart
+    - `npm install --production`        NOT install devDependencies
     - Project names need to be all lowercase and contain url friendly characters, e.g., no spaces, instead use a hyphen.
+
+
 
 ## 5.1. Express
 
@@ -778,11 +781,11 @@ A front-end library, fast prototype, responsive
 1. Skeleton
     - In project folder `npx express-generator`
 
-
-
-
 1. Auto restart when changing:
     - `nodemon`
+
+
+
 
 ## 5.2. Route
 
@@ -800,7 +803,19 @@ A front-end library, fast prototype, responsive
     - body param
 
 1. Order
-    - First match reponds
+    - First match respond
+
+1. Get data in address
+    - `req.query.key`   => val in ...?key=val
+    - `req.params.key`  => val in /.../:key
+
+1. Get data in post request
+    - install body-parser
+    - `app.user(bodyParser.urlencoded({extended: true}))`
+    - `req.body.key`
+
+1. Inject data to ejs
+    - `res.render('ejs_file', {key: val})`
 
 1. .ejs file
     - Passing var: res.render("fileName.ejs", {varInEjs: varInAppJs})
@@ -830,24 +845,66 @@ A front-end library, fast prototype, responsive
 1. Path:for files in public/ folder
     - User `/style.css` instead of `style.css` to fix it under root
 
-### 5.2.2. EJS
+## 5.3. Views
+
+1. Render ejs in Routes
+    - `res.render('ejs_file', {key: val})`
 
 1. Tag
-    - `<%- include("path/aprtial.ejs") %>` include partial
+    - `<%- include("partials/header.ejs") %>` include partial
     - `<%= %>` run and render the return value
     - `<% %>` run the code only
 
 1. Partials
+    - loc: `views/partials`
+    - include in view
+    - contents
+        - header
+        - footer
+        - others
 
-# 6. React
 
-## 6.1. Intro
+# 6. API
+
+1. Authorization
+
+1. RESTful
+
+1. Format:
+    - XML
+    - JSON
+        - diff from JS obj: need quotes around  keys
+
+1. Node module: request
+    - `body` => string => parse it to use
+
+    ```js
+    request(url, (err, res, body) => {
+        if (!err && res.statusCode === 200) {
+            var parsedData = JSON.parse(body)
+            console.log(parsedData);
+        }
+    })
+    ```
+
+
+# Tools
+
+## Curl: trigger routes
+
+1. params
+    - `-d 'data [url]` post request
+    - https://ec.haxx.se/
+
+# 7. React
+
+## 7.1. Intro
 
 1. Start a Python http server at current folder
     - `python -m http.server`
 
-## 6.2. official tutorial
-### 6.2.1. Create React App on local machine
+## 7.2. official tutorial
+### 7.2.1. Create React App on local machine
 
 ```sh
 npx create-react-app my-app
@@ -855,17 +912,17 @@ npx create-react-app my-app
 
 Common component:
 
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './...css';
-```
+    ```js
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import './...css';
+    ```
 
-### 6.2.2. React Component
+### 7.2.2. React Component
 
 A component takes in params called *__props__*
 
-#### 6.2.2.1. Class Component
+#### 7.2.2.1. Class Component
 
 ``` js
 // each square of the board
@@ -902,7 +959,7 @@ class Board extends React.component {
 }
 ```
 
-#### 6.2.2.2. Lifting state up
+#### 7.2.2.2. Lifting state up
 
 1. Avoid ask states from child
     - difficult to understand
@@ -976,7 +1033,7 @@ class Board extends React.Component {
 }
 ```
 
-#### 6.2.2.3. Function Components
+#### 7.2.2.3. Function Components
 
 1. Simpler, better way for stateless components.
 
@@ -1002,7 +1059,7 @@ funciton Square(props) {
 }
 ```
 
-# 7. Philosophy
+# 8. Philosophy
 
 1. DRY: don't repeat yourself.
 
@@ -1033,7 +1090,7 @@ funciton Square(props) {
 1. HTTP
     - Address bar can only make get request
 
-## 7.1. Design Patterns
+## 8.1. Design Patterns
 
 1. The way we structure code
 
@@ -1041,8 +1098,8 @@ funciton Square(props) {
     - Orgnized
     - Avoid namespace collision
 
-# 8. Resources
+# 9. Resources
 
-## 8.1. Icon
+## 9.1. Icon
 
 1. Font awesome: https://use.fontawesome.com/releases/v5.11.2/css/all.css
