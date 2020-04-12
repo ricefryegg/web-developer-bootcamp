@@ -736,7 +736,7 @@ A front-end library, fast prototype, responsive
 
 1. Gird size: still add to 12
     - 5 sizes -> 5 layout
-        - `.col-` (default, xs)
+        - `.col-` (default, xs)   
         - `.col-sm-` -> `.col-xs-` in bs3
         - `.col-md-` -> `.col-sm-` in bs3
         - `.col-lg-` -> `.col-md-` in bs3
@@ -902,6 +902,16 @@ A front-end library, fast prototype, responsive
 
 1. Start a Python http server at current folder
     - `python -m http.server`
+
+1. Loop thorough a array and map to snippets
+    - `arr.map(item => <li>{item}</li>);`
+
+1. Attribute name changes in jsx (will have notifications in console)
+    - class => className
+    - for => htmlfor
+
+1. inline CSS: obj `style={{key:val}}`, key need to use camelCase
+
 
 ## 7.2. official tutorial
 ### 7.2.1. Create React App on local machine

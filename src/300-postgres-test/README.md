@@ -13,6 +13,15 @@
         --rm \
         -d \
         postgres
+        
+    docker run ^
+        --mount type=volume,src=pgsql,dst=/var/lib/postgresql/data ^
+        -e POSTGRES_PASSWORD=[posgres_pwd] ^
+        -p 5432:5432 ^
+        --name pg ^
+        --rm ^
+        -d ^
+        postgres
     ```
 
     - Params description
