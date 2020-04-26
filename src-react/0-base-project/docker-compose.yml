@@ -1,0 +1,12 @@
+version: "3"
+
+services: 
+    
+    frontend:
+        build: .
+        ports: 
+            - "3000:3000"
+        stdin_open: true
+        volumes: 
+            - .:/frontend
+            - /frontend/node_modules

@@ -486,6 +486,7 @@ html {
         ```js
         arr.forEach( (e, i, arr) => { x...; i... ; arr...; } );
         ```
+    - `.splice(pos, length, *array)` replace / remove elements
 
 1. Properties
     - `.length`
@@ -549,7 +550,7 @@ html {
             Array.prototype.myForEach = fn => fn(this.length);
             ```
 
-        - Omit parentheisis when only 1 param, omit return and brackets when only return exists
+        - Omit parenthesis when only 1 param, omit return and brackets when only return exists (As literals!)
 
             ```js
             <!-- identical -->
@@ -573,7 +574,11 @@ html {
 ### 3.5.1. "this" keyword
 
 
-## 3.6. DOM
+
+## 3.6. Class
+
+
+## 3.7. DOM
 
 1. Document Object Model
     - `<script> should be at the bottom to avoid DOM not loaded yet`
@@ -603,7 +608,7 @@ html {
         - `getAttribute("<attr_name>")`
         - `setAttribute("<attr_name>", "val")`
 
-### 3.6.1. Events
+### 3.7.1. Events
 
 1. Process: select element => add event listener
     - `[elementHandle].addEventListener(eventType, fn)`
@@ -614,7 +619,7 @@ html {
     - content: `change`
     - ref: https://developer.mozilla.org/en-US/docs/Web/API/Event
 
-## 3.7. Chrome
+## 3.8. Chrome
 
 1. Built-in methods
     - `alert`
@@ -888,17 +893,17 @@ A front-end library, fast prototype, responsive
     ```
 
 
-# Tools
+# 7. Tools
 
-## Curl: trigger routes
+## 7.1. Curl: trigger routes
 
 1. params
     - `-d 'data [url]` post request
     - https://ec.haxx.se/
 
-# 7. React
+# 8. React
 
-## 7.1. Intro
+## 8.1. Intro
 
 1. Start a Python http server at current folder
     - `python -m http.server`
@@ -913,8 +918,101 @@ A front-end library, fast prototype, responsive
 1. inline CSS: obj `style={{key:val}}`, key need to use camelCase
 
 
-## 7.2. official tutorial
-### 7.2.1. Create React App on local machine
+
+
+### 8.1.1. Props
+
+1. Data passed to a component or in defaults.
+1. Immutable by components.
+    - ideal for component configurations
+
+
+### 8.1.2. State
+
+1. State is internal data of a component, change constantly against events.
+    -  
+
+1. Mutable by components, can changes overtime.
+
+1. Requires init when components created with the constructor
+    - cannot used in functional component.
+    - `props` need to be explicitly passed in constructor, to make it avail inside constructor.
+
+    ```js
+    constructor(props) {
+        super(props);  /* register component */
+        this.state = { /* values to track */ }
+    }
+    ```
+
+1. Use `this.setState()` to modify state
+    - not available in constructor.
+    - Patch the changed field only, rest unchanged
+    - Asynchronous. Think it as a request!
+    - component re-rendered
+
+1. Events
+    - use class properties to avoid binding
+
+        ```js
+        export default class SomeClass extends Component {
+            ...
+            someMethod = () => {}
+        ```
+
+1. State as props
+    - stateful component pass down data partially as props
+    - downward data flow: parent more stateful than child.
+
+### 8.1.3. create-react-app
+
+1. Create skeleton:
+    - modern, easy for testing
+    - `npx create-react-app .`
+
+1. on top of "webpack"
+    - enable module import/export
+        - pkg all CSS/JS/img into a single file
+        - reduce #HTTP request
+    - hot reloading (only relevant files)
+    - easy testing / deployment
+
+1. Server
+    - start: `npm start`
+
+
+### 8.1.4. Modules
+
+1. New way of `require()`
+
+1. export
+    - `export default <fn_name>` => `import any from './file'` will make `any` to be fn_name
+        - not necessary, make most obvious export as default (eg. same as file_name)
+    - `export { fn1, fn2, fn3 }` => `import { fn3, fn1, fn2 } from './file'` (order doesn't matter)
+    - combine above: `import default_fn, { other_fn1, other_fn2 } from './file'`
+    - exporting at the end
+
+1. import
+    - string for module, relative path for other js file
+    - Must explicitly export before import
+    - importing at the beginning
+
+### 8.1.5. Conventions
+
+1. Each component (class) 
+    - store in a separate file, and filename match the component name (Capitalize)
+    - extends Component
+    - export as default obj
+    - Top level component call 'App'
+
+1. CSS
+    - a CSS for each Component with the same name
+    - import at the top
+    - `className=<ComponentName>` at component top div, and `<ComponentName>_` as prefix for sub-items to style
+
+
+## 8.2. official tutorial
+### 8.2.1. Create React App on local machine
 
 ```sh
 npx create-react-app my-app
@@ -928,11 +1026,11 @@ Common component:
     import './...css';
     ```
 
-### 7.2.2. React Component
+### 8.2.2. React Component
 
 A component takes in params called *__props__*
 
-#### 7.2.2.1. Class Component
+#### 8.2.2.1. Class Component
 
 ``` js
 // each square of the board
@@ -969,7 +1067,7 @@ class Board extends React.component {
 }
 ```
 
-#### 7.2.2.2. Lifting state up
+#### 8.2.2.2. Lifting state up
 
 1. Avoid ask states from child
     - difficult to understand
@@ -1043,7 +1141,7 @@ class Board extends React.Component {
 }
 ```
 
-#### 7.2.2.3. Function Components
+#### 8.2.2.3. Function Components
 
 1. Simpler, better way for stateless components.
 
@@ -1069,7 +1167,7 @@ funciton Square(props) {
 }
 ```
 
-# 8. Philosophy
+# 9. Philosophy
 
 1. DRY: don't repeat yourself.
 
@@ -1100,7 +1198,7 @@ funciton Square(props) {
 1. HTTP
     - Address bar can only make get request
 
-## 8.1. Design Patterns
+## 9.1. Design Patterns
 
 1. The way we structure code
 
@@ -1108,8 +1206,8 @@ funciton Square(props) {
     - Orgnized
     - Avoid namespace collision
 
-# 9. Resources
+# 10. Resources
 
-## 9.1. Icon
+## 10.1. Icon
 
 1. Font awesome: https://use.fontawesome.com/releases/v5.11.2/css/all.css
