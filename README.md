@@ -930,7 +930,7 @@ A front-end library, fast prototype, responsive
 ### 8.1.2. State
 
 1. State is internal data of a component, change constantly against events.
-    -  
+    - state change -> current component re-renders
 
 1. Mutable by components, can changes overtime.
 
@@ -949,7 +949,51 @@ A front-end library, fast prototype, responsive
     - not available in constructor.
     - Patch the changed field only, rest unchanged
     - Asynchronous. Think it as a request!
+        - multiple setState() in row => only last one counts!
+            - use callback functions instead
+
+                ```js
+                this.setState(st => {...});
+                ```
+            - or even better, functional setState, easier for testing
+
+                ```js
+                function howToSetState(st){...; return st_new}
+                this.setState(howToSetState);
+                ```
+
     - component re-rendered
+
+    - Change mutable types: make a new COPY and edit instead of modify partially.
+        - use .map, .filter, .reduce, and `...` (spread oprator)
+
+        ```js
+        // do NOT do this!
+        function updateTodos(id) {
+            // do NOT change old state
+            const todo = this.state.todos.find(todo => todo.id === id);
+            todo.done = true;
+
+            this.setState({todos: this.state.todos});
+        }
+
+        // DO THIS instead
+        function updateTodos(id) {
+            // instead, make a copy of it and change
+            const newTodos = this.state.todos.map(todo => {
+                if (todo.id === id){
+                    return {...todo, done: true};
+                });
+
+            this.setState({todos: newTodos});
+        }
+        ```
+
+1. Design state
+    - minimize the state
+        - fixed val => prop
+        - derivative value => only keep the base val
+    - state at the parent, props to the child -> downward data flow
 
 1. Events
     - use class properties to avoid binding
