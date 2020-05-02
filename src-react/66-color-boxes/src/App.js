@@ -1,14 +1,11 @@
 import React from 'react';
 import './App.css';
-
-import FlipCoin from './FlipCoin';
+import ColorBoxes from './ColorBoxes';
 
 function App() {
-  
   return (
     <div className="App">
-      <FlipCoin />
-
+      <ColorBoxes numBoxes={30}/>
     </div>
   );
 }

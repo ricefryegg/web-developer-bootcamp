@@ -1007,6 +1007,9 @@ A front-end library, fast prototype, responsive
 1. State as props
     - stateful component pass down data partially as props
     - downward data flow: parent more stateful than child.
+    - passing parent-biding fn to child, let child triggers it.
+        - better: pass the function and value, Invoke at child.
+        - return specific function in class method or create arrow fn when passing down `onClick = {() => this.handleClick()}`
 
 ### 8.1.3. create-react-app
 
@@ -1053,6 +1056,35 @@ A front-end library, fast prototype, responsive
     - a CSS for each Component with the same name
     - import at the top
     - `className=<ComponentName>` at component top div, and `<ComponentName>_` as prefix for sub-items to style
+
+
+### 8.1.6. Events
+
+1. Events list: https://reactjs.org/docs/events.html
+
+### 8.1.7. Binding
+
+1. In-constructor binding, simply define: handleClick = () => { ... }
+    - easier bind to multiple components
+    - shortcut of define and bind in constructor, babel will convert to full:
+
+        ```js
+        constructor(props) {
+            super(props);
+            ...
+            this.handleClick = this.handleClick.bind(this);
+        }
+        ```
+1. Bind higher the better.
+    - if params in child required, pass down function and bind at child in another layer
+
+1. Inline binding: `onClick = {this.handleClick.bind(this)}` or inline arrow function: `onClick = {() => this.handleClick()}`
+    - hard to pass to multiple components
+    - every render creates a new function
+
+1. Naming convention:
+    - parent: action
+    - child: handleAction
 
 
 ## 8.2. official tutorial

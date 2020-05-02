@@ -1,0 +1,12 @@
+.Cell {
+  height: 100px;
+  width: 100px;
+  border-radius: 1px;
+  background-color: #263238;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.lightOn {
+  background: #00bcd4;
+}
